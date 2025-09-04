@@ -1,5 +1,8 @@
 const express = require("express");
+const morgan = require("morgan");
 const app = express();
+
+app.use(morgan("tiny"));
 
 app.set("view engine", "ejs");
 
@@ -25,9 +28,9 @@ app.get("/contact", (req, res) => {
 app.get("/services", (req, res) => {
   res.send("Services Page");
 });
-
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.post("/get-form-data", (req, res) => {
+  console.log(req.query);
+  res.send("Form Data Received");
 });
 
-module.exports = app;
+app.listen(3000);
